@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Emaratech.Services.Scheduler.Entities.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="JOB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="JOB_ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar2" MaxLength="256" Nullable="false" />
+          <Property Name="JOB_TYPE" Type="nvarchar2" MaxLength="256" />
+          <Property Name="VERSION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IS_DELETED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="IS_ACTIVE" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="DELETED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="DELETED_DATE" Type="timestamp" Precision="6" />
+          <Property Name="CLONE_SOURCE_ID" Type="nvarchar2" MaxLength="32" />
+          <Property Name="CLONE_SOURCE_VERSION" Type="number" Precision="38" Scale="0" />
+          <Property Name="REVERTED_FROM_VERSION" Type="number" Precision="38" Scale="0" />
+          <Property Name="IS_ENABLED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="IS_LOCKED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="LOCKED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="LOCKED_DATE" Type="timestamp" Precision="6" />
+          <Property Name="IS_EXECUTED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="EXECUTED_DATE" Type="timestamp" Precision="6" />
+          <Property Name="EXECUTED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="MAX_LOCK_SECONDS" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="JOB_INSTANCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="JOB_ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="IS_EXECUTED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="EXECUTED_DATE" Type="timestamp" Precision="6" />
+          <Property Name="EXECUTED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="IS_DELETED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="DELETED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="DELETED_DATE" Type="timestamp" Precision="6" />
+        </EntityType>
+        <EntityType Name="JOB_LOCK">
+          <Key>
+            <PropertyRef Name="JOB_ID" />
+          </Key>
+          <Property Name="JOB_ID" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="LOCKED_BY" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ECORE_SCHEDULER.JOB_PARAMETER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="JOB_PARAMETER">
+          <Key>
+            <PropertyRef Name="JOB_ID" />
+            <PropertyRef Name="START_VERSION" />
+          </Key>
+          <Property Name="JOB_ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="START_VERSION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="END_VERSION" Type="number" Precision="38" Scale="0" />
+          <Property Name="NAME" Type="nvarchar2" MaxLength="256" />
+          <Property Name="VALUE" Type="nvarchar2" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="JOB_SCHEDULE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="JOB_ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="SCHEDULE_TYPE" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="SCHEDULE_FREQUENCY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="VERSION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IS_DELETED" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="DELETED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="DELETED_DATE" Type="timestamp" Precision="6" />
+          <Property Name="START_DATE" Type="timestamp" Precision="6" />
+        </EntityType>
+        <EntityType Name="JOB_SOURCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="CLASS" Type="nvarchar2" MaxLength="256" />
+          <Property Name="PROCESS" Type="nvarchar2" MaxLength="256" />
+          <Property Name="API" Type="nvarchar2" MaxLength="256" />
+          <Property Name="CONTENT" Type="blob" />
+          <Property Name="JOB_ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCHEDULE_TYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="TYPE" Type="nvarchar2" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SYSTEM_JOB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="SYSTEM_KEY" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="JOB_ID" Type="nvarchar2" MaxLength="32" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="DELETED_DATE" Type="timestamp" Precision="6" />
+          <Property Name="DELETED_BY" Type="nchar" MaxLength="32" />
+          <Property Name="IS_DELETED" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_JOB_PARAMETER_JOB">
+          <End Role="JOB" Type="Self.JOB" Multiplicity="1" />
+          <End Role="JOB_PARAMETER" Type="Self.JOB_PARAMETER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JOB_PARAMETER">
+              <PropertyRef Name="JOB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOB_SCHEDULE_SCHEDULE_TYPE">
+          <End Role="SCHEDULE_TYPE" Type="Self.SCHEDULE_TYPE" Multiplicity="1" />
+          <End Role="JOB_SCHEDULE" Type="Self.JOB_SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCHEDULE_TYPE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JOB_SCHEDULE">
+              <PropertyRef Name="SCHEDULE_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmaratechServicesSchedulerEntitiesStoreContainer">
+          <EntitySet Name="JOB" EntityType="Self.JOB" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="JOB_INSTANCE" EntityType="Self.JOB_INSTANCE" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="JOB_LOCK" EntityType="Self.JOB_LOCK" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="JOB_SCHEDULE" EntityType="Self.JOB_SCHEDULE" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="JOB_SOURCE" EntityType="Self.JOB_SOURCE" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="SCHEDULE_TYPE" EntityType="Self.SCHEDULE_TYPE" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="SYSTEM_JOB" EntityType="Self.SYSTEM_JOB" Schema="ECORE_SCHEDULER" store:Type="Tables" />
+          <EntitySet Name="JOB_PARAMETER" EntityType="Self.JOB_PARAMETER" store:Type="Tables" store:Schema="ECORE_SCHEDULER">
+            <DefiningQuery>SELECT 
+"JOB_PARAMETER"."JOB_ID" AS "JOB_ID", 
+"JOB_PARAMETER"."START_VERSION" AS "START_VERSION", 
+"JOB_PARAMETER"."END_VERSION" AS "END_VERSION", 
+"JOB_PARAMETER"."NAME" AS "NAME", 
+"JOB_PARAMETER"."VALUE" AS "VALUE"
+FROM "ECORE_SCHEDULER"."JOB_PARAMETER" "JOB_PARAMETER"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_JOB_PARAMETER_JOB" Association="Self.FK_JOB_PARAMETER_JOB">
+            <End Role="JOB" EntitySet="JOB" />
+            <End Role="JOB_PARAMETER" EntitySet="JOB_PARAMETER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOB_SCHEDULE_SCHEDULE_TYPE" Association="Self.FK_JOB_SCHEDULE_SCHEDULE_TYPE">
+            <End Role="SCHEDULE_TYPE" EntitySet="SCHEDULE_TYPE" />
+            <End Role="JOB_SCHEDULE" EntitySet="JOB_SCHEDULE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Emaratech.Services.Scheduler.Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Int64" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="DeletedBy" Type="String" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="6" />
+          <Property Name="CloneSourceId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="CloneSourceVersion" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="RevertedFromVersion" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="JobParameters" Relationship="Emaratech.Services.Scheduler.Entities.FK_JOB_PARAMETER_JOB" FromRole="Job" ToRole="JOB_PARAMETER" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+          <Property Name="LockedBy" Type="String" Nullable="true" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="LockedDate" Type="DateTime" Nullable="true" Precision="6" />
+          <Property Name="IsExecuted" Type="Boolean" Nullable="false" />
+          <Property Name="ExecutedDate" Type="DateTime" Nullable="true" Precision="6" />
+          <Property Name="ExecutedBy" Type="String" Nullable="true" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="MaxLockSeconds" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="JobSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScheduleTypeId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Version" Type="Int64" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="DeletedBy" Type="String" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="6" />
+          <Property Name="ScheduleFrequency" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ScheduleType" Relationship="Emaratech.Services.Scheduler.Entities.FK_JOB_SCHEDULE_SCHEDULE_TYPE1" FromRole="JobSchedule" ToRole="ScheduleType" />
+          <Property Name="StartDate" Type="DateTime" Precision="6" />
+        </EntityType>
+        <EntityType Name="JobSource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Class" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Process" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="API" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="JobId" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ScheduleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SystemKey" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="6" />
+          <Property Name="DeletedBy" Type="String" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SchedulerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jobs1" EntityType="Emaratech.Services.Scheduler.Entities.Job" />
+          <EntitySet Name="JobSchedules" EntityType="Emaratech.Services.Scheduler.Entities.JobSchedule" />
+          <EntitySet Name="JobSources" EntityType="Emaratech.Services.Scheduler.Entities.JobSource" />
+          <EntitySet Name="ScheduleTypes" EntityType="Emaratech.Services.Scheduler.Entities.ScheduleType" />
+          <EntitySet Name="SystemJobs" EntityType="Emaratech.Services.Scheduler.Entities.SystemJob" />
+          <AssociationSet Name="FK_JOB_SCHEDULE_SCHEDULE_TYPE1" Association="Emaratech.Services.Scheduler.Entities.FK_JOB_SCHEDULE_SCHEDULE_TYPE1">
+            <End Role="ScheduleType" EntitySet="ScheduleTypes" />
+            <End Role="JobSchedule" EntitySet="JobSchedules" />
+          </AssociationSet>
+          <EntitySet Name="JobParameters1" EntityType="Emaratech.Services.Scheduler.Entities.JobParameter" />
+          <AssociationSet Name="FK_JOB_PARAMETER_JOB" Association="Emaratech.Services.Scheduler.Entities.FK_JOB_PARAMETER_JOB">
+            <End Role="Job" EntitySet="Jobs1" />
+            <End Role="JOB_PARAMETER" EntitySet="JobParameters1" />
+          </AssociationSet>
+          <EntitySet Name="JobInstances" EntityType="Emaratech.Services.Scheduler.Entities.JobInstance" />
+          <EntitySet Name="JobLocks" EntityType="Emaratech.Services.Scheduler.Entities.JobLock" />
+          </EntityContainer>
+        <Association Name="FK_JOB_SCHEDULE_SCHEDULE_TYPE1">
+          <End Type="Emaratech.Services.Scheduler.Entities.ScheduleType" Role="ScheduleType" Multiplicity="1" />
+          <End Type="Emaratech.Services.Scheduler.Entities.JobSchedule" Role="JobSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSchedule">
+              <PropertyRef Name="ScheduleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="StartVersion" />
+          </Key>
+          <Property Name="JobId" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="StartVersion" Type="Int64" Nullable="false" />
+          <Property Name="EndVersion" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="Emaratech.Services.Scheduler.Entities.FK_JOB_PARAMETER_JOB" FromRole="JOB_PARAMETER" ToRole="Job" />
+        </EntityType>
+        <Association Name="FK_JOB_PARAMETER_JOB">
+          <End Type="Emaratech.Services.Scheduler.Entities.Job" Role="Job" Multiplicity="1" />
+          <End Type="Emaratech.Services.Scheduler.Entities.JobParameter" Role="JOB_PARAMETER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JOB_PARAMETER">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobInstance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="JobId" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="IsExecuted" Type="Boolean" Nullable="false" />
+          <Property Name="ExecutedDate" Type="DateTime" Nullable="true" Precision="6" />
+          <Property Name="ExecutedBy" Type="String" Nullable="true" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="DeletedBy" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="6" />
+        </EntityType>
+        <EntityType Name="JobLock">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="LockedBy" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmaratechServicesSchedulerEntitiesStoreContainer" CdmEntityContainer="SchedulerContext">
+          <EntitySetMapping Name="Jobs1">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.Job">
+              <MappingFragment StoreEntitySet="JOB">
+                <ScalarProperty Name="MaxLockSeconds" ColumnName="MAX_LOCK_SECONDS" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IS_ENABLED" />
+                <ScalarProperty Name="ExecutedBy" ColumnName="EXECUTED_BY" />
+                <ScalarProperty Name="ExecutedDate" ColumnName="EXECUTED_DATE" />
+                <ScalarProperty Name="IsExecuted" ColumnName="IS_EXECUTED" />
+                <ScalarProperty Name="LockedDate" ColumnName="LOCKED_DATE" />
+                <ScalarProperty Name="LockedBy" ColumnName="LOCKED_BY" />
+                <ScalarProperty Name="IsLocked" ColumnName="IS_LOCKED" />
+                <ScalarProperty Name="IsActive" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="JobType" ColumnName="JOB_TYPE" />
+                <ScalarProperty Name="Version" ColumnName="VERSION" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DELETED_BY" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DELETED_DATE" />
+                <ScalarProperty Name="CloneSourceId" ColumnName="CLONE_SOURCE_ID" />
+                <ScalarProperty Name="CloneSourceVersion" ColumnName="CLONE_SOURCE_VERSION" />
+                <ScalarProperty Name="RevertedFromVersion" ColumnName="REVERTED_FROM_VERSION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSchedules">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.JobSchedule">
+              <MappingFragment StoreEntitySet="JOB_SCHEDULE">
+                <ScalarProperty Name="StartDate" ColumnName="START_DATE" />
+                <ScalarProperty Name="ScheduleFrequency" ColumnName="SCHEDULE_FREQUENCY" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+                <ScalarProperty Name="ScheduleTypeId" ColumnName="SCHEDULE_TYPE" />
+                <ScalarProperty Name="Version" ColumnName="VERSION" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DELETED_BY" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DELETED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSources">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.JobSource">
+              <MappingFragment StoreEntitySet="JOB_SOURCE">
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+                <ScalarProperty Name="Content" ColumnName="CONTENT" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Class" ColumnName="CLASS" />
+                <ScalarProperty Name="Process" ColumnName="PROCESS" />
+                <ScalarProperty Name="API" ColumnName="API" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleTypes">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.ScheduleType">
+              <MappingFragment StoreEntitySet="SCHEDULE_TYPE">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemJobs">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.SystemJob">
+              <MappingFragment StoreEntitySet="SYSTEM_JOB">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="SystemKey" ColumnName="SYSTEM_KEY" />
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DELETED_DATE" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DELETED_BY" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IS_DELETED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobParameters1">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.JobParameter">
+              <MappingFragment StoreEntitySet="JOB_PARAMETER">
+                <ScalarProperty Name="Value" ColumnName="VALUE" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="EndVersion" ColumnName="END_VERSION" />
+                <ScalarProperty Name="StartVersion" ColumnName="START_VERSION" />
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobInstances">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.JobInstance">
+              <MappingFragment StoreEntitySet="JOB_INSTANCE">
+                <ScalarProperty Name="DeletedDate" ColumnName="DELETED_DATE" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DELETED_BY" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="ExecutedBy" ColumnName="EXECUTED_BY" />
+                <ScalarProperty Name="ExecutedDate" ColumnName="EXECUTED_DATE" />
+                <ScalarProperty Name="IsExecuted" ColumnName="IS_EXECUTED" />
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobLocks">
+            <EntityTypeMapping TypeName="Emaratech.Services.Scheduler.Entities.JobLock">
+              <MappingFragment StoreEntitySet="JOB_LOCK">
+                <ScalarProperty Name="CreatedDate" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="LockedBy" ColumnName="LOCKED_BY" />
+                <ScalarProperty Name="JobId" ColumnName="JOB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{663F783E-134C-41B0-BEFB-470F7B7DC7DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emaratech.Services.Scheduler.Contracts</RootNamespace>
+    <AssemblyName>Emaratech.Services.Scheduler.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EmaratechDev|AnyCPU'">
+    <OutputPath>bin\EmaratechDev\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emaratech.Services.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Emaratech.Services.Common.1.0.19\lib\net461\Emaratech.Services.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Emaratech.Services.WcfCommons.Cors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Emaratech.Services.WcfCommons.Cors.1.0.4\lib\net461\Emaratech.Services.WcfCommons.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Emaratech.Services.WcfCommons.Faults, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Emaratech.Services.WcfCommons.Faults.1.0.21\lib\net461\Emaratech.Services.WcfCommons.Faults.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImpromptuInterface, Version=6.2.2.0, Culture=neutral, PublicKeyToken=0b1781c923b2975b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImpromptuInterface.6.2.2\lib\net40\ImpromptuInterface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SwaggerWcf, Version=0.1.17.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SwaggerWcf.1.0.9\lib\net45\SwaggerWcf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccess\ISchedulerDataAccessService.cs" />
+    <Compile Include="DataAccess\Models\JobInstance.cs" />
+    <Compile Include="DataAccess\Models\Job.cs" />
+    <Compile Include="DataAccess\Models\JobParameter.cs" />
+    <Compile Include="DataAccess\Models\JobSchedule.cs" />
+    <Compile Include="DataAccess\Models\JobSource.cs" />
+    <Compile Include="DataAccess\Models\ScheduleType.cs" />
+    <Compile Include="Export\ExportJob.cs" />
+    <Compile Include="Export\ExportJobParameter.cs" />
+    <Compile Include="Export\ExportJobSchedule.cs" />
+    <Compile Include="Export\ExportJobSource.cs" />
+    <Compile Include="Export\ImportJob.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rest\ISchedulerService.cs" />
+    <Compile Include="Rest\Models\RestJobEx.cs" />
+    <Compile Include="Rest\Models\RestJobParameter.cs" />
+    <Compile Include="Rest\Models\RestJobSourceContent.cs" />
+    <Compile Include="Rest\Models\RestJobSourceAdd.cs" />
+    <Compile Include="Rest\Models\RestJobInstanceUpdate.cs" />
+    <Compile Include="Rest\Models\RestJobUpdate.cs" />
+    <Compile Include="Rest\Models\RestJobAdd.cs" />
+    <Compile Include="Rest\Models\RestJobSource.cs" />
+    <Compile Include="Rest\Models\RestNextJobInfo.cs" />
+    <Compile Include="Rest\Models\RestJobInstance.cs" />
+    <Compile Include="Rest\Models\RestJobFilter.cs" />
+    <Compile Include="Rest\Models\RestJobSchedule.cs" />
+    <Compile Include="Rest\Models\RestJob.cs" />
+    <Compile Include="Rest\Models\RestScheduleType.cs" />
+    <Compile Include="Rest\Models\RestSystems.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

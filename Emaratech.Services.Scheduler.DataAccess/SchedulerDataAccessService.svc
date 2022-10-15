@@ -1,0 +1,3 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" 
+    Service="Emaratech.Services.Scheduler.DataAccess.SchedulerDataAccessService" CodeBehind="SchedulerDataAccessService.svc.cs" 
+    Factory="Emaratech.Services.WcfCommons.Dynamic.DecoratorNinjectServiceHostFactory" %>
